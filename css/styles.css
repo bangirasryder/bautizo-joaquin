@@ -175,6 +175,10 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    /* El degradado solo pinta dentro de la caja: los trazos de la letra
+       caligráfica sobresalen, así que se amplía la caja sin mover el diseño */
+    padding: .25em .45em;
+    margin: -.25em -.45em;
 }
 
 .orn { position: absolute; overflow: visible; pointer-events: none; }
@@ -192,8 +196,8 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     padding: 8cqw 7.5cqw 6.5cqw;
     justify-content: space-between;
 }
-.invite__title { font-size: 11.5cqw; padding: 0 2cqw; }
-.invite__name  { font-size: 8.6cqw; margin-top: .6cqw; padding: 0 2cqw .6cqw; word-spacing: .18em; }
+.invite__title { font-size: 11.5cqw; }
+.invite__name  { font-size: 8.6cqw; word-spacing: .18em; }
 
 .verse {
     margin-top: 2.2cqw;
@@ -374,7 +378,7 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     text-transform: uppercase;
     color: var(--ink-soft);
 }
-.cover__title { font-size: 19cqw; margin-top: 1cqw; padding: 0 3cqw 1cqw; }
+.cover__title { font-size: 19cqw; margin-top: calc(-.25em + 1.5cqw); }
 
 .cover__medallion { position: relative; width: 36cqw; aspect-ratio: 200 / 260; margin: 1.5cqw 0 1cqw; }
 .cover__wreath { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -389,9 +393,9 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     justify-content: center;
 }
 .cover__doves { width: 82%; margin-top: -2cqw; }
-.cover__initial { font-size: 22cqw; margin-top: -3cqw; padding: 0 3cqw; }
+.cover__initial { font-size: 19cqw; margin-top: calc(-.25em - 1cqw); }
 
-.cover__name { font-size: 14cqw; padding: 0 3cqw 1cqw; }
+.cover__name { font-size: 14cqw; }
 .cover__surname {
     font-family: var(--font-caps);
     font-size: 4cqw;
