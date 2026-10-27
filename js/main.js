@@ -249,37 +249,60 @@
             [64, .5], [60, .5], [65, 1], [64, .5], [62, .5], [60, 4]
         ];
         const beat = 0.46;
+        const lookahead = 1.2;   // segundos programados por adelantado (aguanta pausas del navegador)
         let ctx, master, timer, nextTime = 0, index = 0, playing = false;
+        const voices = new Set();   // osciladores programados que aún no terminan
 
         function setup() {
             ctx = new (window.AudioContext || window.webkitAudioContext)();
             master = ctx.createGain();
             master.gain.value = 0;
 
-            // Eco suave para dar sensación de caja musical
+            // Limitador para que las notas que coinciden nunca saturen
+            const limiter = ctx.createDynamicsCompressor();
+            limiter.threshold.value = -12;
+            limiter.knee.value = 6;
+            limiter.ratio.value = 8;
+            limiter.connect(ctx.destination);
+
+            // Eco muy ligero para dar sensación de caja musical sin empastar las notas
             const delay = ctx.createDelay();
             const feedback = ctx.createGain();
+            const wet = ctx.createGain();
             const tone = ctx.createBiquadFilter();
-            delay.delayTime.value = 0.31;
-            feedback.gain.value = 0.28;
+            delay.delayTime.value = 0.23;
+            feedback.gain.value = 0.12;
+            wet.gain.value = 0.18;
             tone.type = 'lowpass';
-            tone.frequency.value = 2600;
-            master.connect(ctx.destination);
+            tone.frequency.value = 2200;
+            master.connect(limiter);
             master.connect(delay);
             delay.connect(tone);
             tone.connect(feedback);
             feedback.connect(delay);
-            tone.connect(ctx.destination);
+            tone.connect(wet);
+            wet.connect(limiter);
         }
 
-        function pluck(midi, time) {
+        function advance() {
+            nextTime += melody[index][1] * beat;
+            index++;
+            if (index === melody.length) {
+                index = 0;
+                nextTime += beat * 2;
+            }
+        }
+
+        function pluck(midi, dur, time) {
             const f = 440 * Math.pow(2, (midi + 12 - 69) / 12);
+            // La cola de cada nota termina poco después de la siguiente
+            const tail = Math.min(1.4, dur * beat + 0.55);
             const out = ctx.createGain();
             out.gain.setValueAtTime(0.0001, time);
-            out.gain.exponentialRampToValueAtTime(0.22, time + 0.008);
-            out.gain.exponentialRampToValueAtTime(0.0001, time + 2.2);
+            out.gain.exponentialRampToValueAtTime(0.16, time + 0.008);
+            out.gain.exponentialRampToValueAtTime(0.0001, time + tail);
             out.connect(master);
-            [[1, 1], [2, 0.18], [4.2, 0.05]].forEach(([mult, amp]) => {
+            [[1, 1], [2, 0.16], [4.2, 0.04]].forEach(([mult, amp]) => {
                 const osc = ctx.createOscillator();
                 const g = ctx.createGain();
                 osc.type = 'sine';
@@ -287,20 +310,20 @@
                 g.gain.value = amp;
                 osc.connect(g).connect(out);
                 osc.start(time);
-                osc.stop(time + 2.3);
+                osc.stop(time + tail + 0.05);
+                voices.add(osc);
+                osc.onended = () => voices.delete(osc);
             });
         }
 
         function schedule() {
-            while (nextTime < ctx.currentTime + 0.25) {
-                const [note, dur] = melody[index];
-                pluck(note, nextTime);
-                nextTime += dur * beat;
-                index++;
-                if (index === melody.length) {
-                    index = 0;
-                    nextTime += beat * 2;
-                }
+            if (!playing || ctx.state !== 'running') return;
+            // Si el navegador congeló el temporizador (al hacer scroll o cambiar de app),
+            // se saltan las notas atrasadas en lugar de sonarlas todas juntas.
+            while (nextTime < ctx.currentTime + 0.02) advance();
+            while (nextTime < ctx.currentTime + lookahead) {
+                pluck(melody[index][0], melody[index][1], nextTime);
+                advance();
             }
         }
 
@@ -308,21 +331,30 @@
             get playing() { return playing; },
             play() {
                 if (!ctx) setup();
-                ctx.resume();
                 playing = true;
-                nextTime = Math.max(nextTime, ctx.currentTime + 0.05);
-                master.gain.cancelScheduledValues(ctx.currentTime);
-                master.gain.setTargetAtTime(0.55, ctx.currentTime, 0.4);
                 clearInterval(timer);
-                timer = setInterval(schedule, 60);
-                schedule();
+                // Esperar a que el audio esté realmente activo antes de programar notas
+                ctx.resume().then(() => {
+                    if (!playing) return;
+                    nextTime = ctx.currentTime + 0.1;
+                    master.gain.cancelScheduledValues(ctx.currentTime);
+                    master.gain.setTargetAtTime(0.6, ctx.currentTime, 0.4);
+                    clearInterval(timer);
+                    timer = setInterval(schedule, 100);
+                    schedule();
+                });
             },
             pause() {
                 if (!ctx) return;
                 playing = false;
-                master.gain.setTargetAtTime(0, ctx.currentTime, 0.25);
                 clearInterval(timer);
-                setTimeout(() => { if (!playing) ctx.suspend(); }, 900);
+                master.gain.cancelScheduledValues(ctx.currentTime);
+                master.gain.setTargetAtTime(0, ctx.currentTime, 0.15);
+                // Cancelar las notas ya programadas para que no se sumen al reanudar
+                const stopAt = ctx.currentTime + 0.25;
+                voices.forEach(osc => { try { osc.stop(stopAt); } catch (e) { /* ya detenido */ } });
+                voices.clear();
+                setTimeout(() => { if (!playing) ctx.suspend(); }, 600);
             }
         };
     })();
