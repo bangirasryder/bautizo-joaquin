@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Bautizo de Joaquín Valle Amaguaña</title>
+    <meta name="description" content="Con la bendición de Dios te invitamos al bautizo de Joaquín · Sábado 14 de noviembre de 2026.">
+    <meta name="theme-color" content="#f6efe2">
+
+    <!-- Vista previa al compartir (WhatsApp, Facebook) -->
+    <meta property="og:title" content="Mi Bautizo · Joaquín Valle Amaguaña">
+    <meta property="og:description" content="Sábado 14 de noviembre de 2026 · 10h30 · Nuestra Señora de los Remedios">
+    <meta property="og:url" content="https://bangirasryder.github.io/bautizo-joaquin/">
+    <meta property="og:image" content="https://bangirasryder.github.io/bautizo-joaquin/assets/img/joaquin.jpg">
+    <meta property="og:image:width" content="330">
+    <meta property="og:image:height" content="450">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 36'%3E%3Cpath fill='%23b8925a' d='M10 0h4v10h9v4h-9v22h-4V14H1v-4h9z'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Fondo con destellos -->
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient__glow ambient__glow--teal"></div>
+        <div class="ambient__glow ambient__glow--gold"></div>
+        <div id="particles"></div>
+    </div>
+
+    <header class="intro">
+        <p class="intro__eyebrow">Con amor te invitamos</p>
+        <p class="intro__hint" id="hint">Pulsa el botón para abrir la invitación</p>
+    </header>
+
+    <main class="stage" id="stage">
+        <div class="book" id="book">
+            <div class="book__shadow" aria-hidden="true"></div>
+
+            <!-- ============ PÁGINA DERECHA: INVITACIÓN PRINCIPAL ============ -->
+            <section class="page page--right" aria-label="Invitación">
+                <div class="paper">
+                    <div class="page__spine page__spine--left"></div>
+                    <div class="content content--invite">
+
+                        <div class="invite__head">
+                            <h1 class="script gold-text invite__title">Mi Bautizo</h1>
+                            <h2 class="script gold-text invite__name">Joaquín Valle Amaguaña</h2>
+                            <p class="verse">
+                                “Y he aquí, una voz de los cielos decía: <em>Éste</em> es mi <em>Hijo amado</em>,
+                                en quien tengo <em>complacencia</em>.” <span class="verse__ref">(Mateo 3:17)</span>
+                            </p>
+                        </div>
+
+                        <div class="portrait-zone">
+                            <div class="wash wash--portrait"></div>
+
+                            <svg class="orn orn--dove orn--tl float"><use href="#i-dove"/></svg>
+                            <svg class="orn orn--dove orn--tr float float--late"><use href="#i-dove"/></svg>
+                            <svg class="orn orn--dove orn--bl float float--late"><use href="#i-dove"/></svg>
+                            <svg class="orn orn--dove orn--br float"><use href="#i-dove"/></svg>
+                            <svg class="orn orn--cross orn--cl"><use href="#i-cross"/></svg>
+                            <svg class="orn orn--cross orn--cr"><use href="#i-cross"/></svg>
+                            <svg class="orn orn--branch orn--bl-up"><use href="#i-branch"/></svg>
+                            <svg class="orn orn--branch orn--bl-low"><use href="#i-branch"/></svg>
+                            <svg class="orn orn--branch orn--br-up"><use href="#i-branch"/></svg>
+                            <svg class="orn orn--branch orn--br-low"><use href="#i-branch"/></svg>
+
+                            <div class="portrait">
+                                <div class="portrait__photo">
+                                    <img src="assets/img/joaquin.jpg" alt="Joaquín sonriendo con su babero de osito">
+                                </div>
+                                <svg class="portrait__wreath" viewBox="0 0 200 260" data-wreath="lace" aria-hidden="true"></svg>
+                            </div>
+                        </div>
+
+                        <ul class="details">
+                            <li class="detail">
+                                <svg class="detail__icon"><use href="#i-calendar"/></svg>
+                                <span class="detail__value">Sábado 14 de<br>Noviembre 2026</span>
+                                <span class="detail__label">Fecha</span>
+                            </li>
+                            <li class="detail">
+                                <svg class="detail__icon"><use href="#i-clock"/></svg>
+                                <span class="detail__value">10h30 am</span>
+                                <span class="detail__label">Hora</span>
+                            </li>
+                            <li class="detail">
+                                <svg class="detail__icon"><use href="#i-church"/></svg>
+                                <span class="detail__value">Nuestra Señora<br>de los Remedios</span>
+                                <span class="detail__label">Iglesia</span>
+                            </li>
+                            <li class="detail">
+                                <svg class="detail__icon"><use href="#i-house"/></svg>
+                                <span class="detail__value">Casa Florida</span>
+                                <span class="detail__label">Recepción</span>
+                            </li>
+                        </ul>
+
+                        <p class="invite__gift">Agradecemos su Obsequio o Sobre Cerrado.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ HOJA QUE GIRA: PORTADA + PADRES/PADRINOS ============ -->
+            <div class="leaf" id="leaf">
+
+                <!-- Portada (libro cerrado) -->
+                <section class="page face face--front" id="cover" role="button" tabindex="0" aria-label="Abrir la invitación">
+                    <div class="paper">
+                        <div class="wash wash--cover-tr"></div>
+                        <div class="wash wash--cover-bl"></div>
+                        <div class="paper__frame"></div>
+
+                        <svg class="orn cover__hydrangea cover__hydrangea--tr"><use href="#i-hydrangea"/></svg>
+                        <svg class="orn cover__hydrangea cover__hydrangea--bl"><use href="#i-hydrangea"/></svg>
+                        <svg class="orn cover__vine cover__vine--tr"><use href="#i-gold-vine"/></svg>
+                        <svg class="orn cover__vine cover__vine--bl"><use href="#i-gold-vine"/></svg>
+
+                        <div class="content content--cover">
+                            <p class="cover__eyebrow">Santo Sacramento del</p>
+                            <h2 class="script gold-text cover__title">Bautizo</h2>
+
+                            <div class="cover__medallion">
+                                <svg class="cover__wreath" viewBox="0 0 200 260" data-wreath="simple" aria-hidden="true"></svg>
+                                <div class="cover__monogram">
+                                    <svg class="cover__doves" viewBox="0 0 140 50" aria-hidden="true">
+                                        <use href="#i-dove" x="0" y="0" width="64" height="48"/>
+                                        <use href="#i-dove" x="-140" y="0" width="64" height="48" transform="scale(-1 1)"/>
+                                    </svg>
+                                    <span class="script gold-text cover__initial">J</span>
+                                </div>
+                            </div>
+
+                            <h3 class="script gold-text cover__name">Joaquín</h3>
+                            <p class="cover__surname">Valle Amaguaña</p>
+                            <p class="cover__date"><span>14</span> · Noviembre · <span>2026</span></p>
+                        </div>
+                    </div>
+
+                    <div class="seal" aria-hidden="true">
+                        <svg viewBox="0 0 24 36"><path fill="#fffaf0" d="M10 1.5c0-.8.9-1.5 2-1.5s2 .7 2 1.5V10h8.5c.8 0 1.5.9 1.5 2s-.7 2-1.5 2H14v20.5c0 .8-.9 1.5-2 1.5s-2-.7-2-1.5V14H1.5C.7 14 0 13.1 0 12s.7-2 1.5-2H10z"/></svg>
+                    </div>
+                </section>
+
+                <!-- Reverso de la portada: Padres y Padrinos -->
+                <section class="page face face--back" aria-label="Padres y padrinos">
+                    <div class="paper">
+                        <div class="page__spine page__spine--right"></div>
+                        <div class="content content--family">
+                            <p class="blessing">
+                                Con la bendición de Dios,<br>
+                                el amor de mis padres y el cariño<br>
+                                de mis padrinos
+                            </p>
+
+                            <div class="plaque plaque--parents">
+                                <svg class="plaque__shape" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><use href="#i-plaque"/></svg>
+                                <svg class="orn plaque__dove"><use href="#i-dove-perched"/></svg>
+                                <svg class="orn plaque__hydrangea plaque__hydrangea--tr"><use href="#i-hydrangea"/></svg>
+                                <svg class="orn plaque__vine plaque__vine--left"><use href="#i-gold-vine"/></svg>
+                                <div class="plaque__text">
+                                    <p class="script plaque__title">Padres:</p>
+                                    <p class="plaque__names">Sr. Jean Paul<br>Valle</p>
+                                    <p class="plaque__and">y</p>
+                                    <p class="plaque__names">Sra. Shirley<br>Amaguaña</p>
+                                </div>
+                            </div>
+
+                            <div class="plaque plaque--godparents">
+                                <svg class="orn plaque__balloons"><use href="#i-balloons"/></svg>
+                                <svg class="plaque__shape" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><use href="#i-plaque"/></svg>
+                                <svg class="orn plaque__vine plaque__vine--l2"><use href="#i-gold-vine"/></svg>
+                                <svg class="orn plaque__vine plaque__vine--r2"><use href="#i-gold-vine"/></svg>
+                                <svg class="orn plaque__hydrangea plaque__hydrangea--bottom"><use href="#i-hydrangea"/></svg>
+                                <div class="plaque__text">
+                                    <p class="script plaque__title">Padrinos:</p>
+                                    <p class="plaque__names">Sr. Ángel<br>Amaguaña&nbsp;C.</p>
+                                    <p class="plaque__and">y</p>
+                                    <p class="plaque__names">Sra. Gloria<br>Yanqui&nbsp;C.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <nav class="controls" aria-label="Controles de la invitación">
+        <button class="btn btn--primary" id="toggleBtn" aria-controls="book" aria-expanded="false">
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-envelope" id="toggleIcon"/></svg>
+            <span id="toggleText">Abrir invitación</span>
+        </button>
+        <button class="btn btn--ghost" id="musicBtn" aria-pressed="false" hidden>
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-note"/></svg>
+            <span id="musicText">Música</span>
+        </button>
+    </nav>
+
+    <div id="petals" aria-hidden="true"></div>
+
+    <!-- ================= Sprite de ilustraciones ================= -->
+    <svg class="sprite" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#a77d43"/>
+                <stop offset=".35" stop-color="#e3c78c"/>
+                <stop offset=".55" stop-color="#b48a4f"/>
+                <stop offset=".8" stop-color="#dcbd7f"/>
+                <stop offset="1" stop-color="#9a733d"/>
+            </linearGradient>
+            <linearGradient id="teal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#9fdcd8"/>
+                <stop offset="1" stop-color="#6fbcb9"/>
+            </linearGradient>
+            <linearGradient id="dove-body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#bde8e5"/>
+                <stop offset="1" stop-color="#6db8b6"/>
+            </linearGradient>
+            <radialGradient id="plaque-wash" cx=".35" cy=".3" r=".8">
+                <stop offset="0" stop-color="#bfe7e3" stop-opacity=".75"/>
+                <stop offset=".55" stop-color="#e3f4f1" stop-opacity=".45"/>
+                <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="balloon" cx=".35" cy=".3" r=".75">
+                <stop offset="0" stop-color="#e9faf8"/>
+                <stop offset=".6" stop-color="#a6dcd7"/>
+                <stop offset="1" stop-color="#76c0bb"/>
+            </radialGradient>
+        </defs>
+
+        <!-- Paloma en vuelo -->
+        <symbol id="i-dove" viewBox="0 0 64 48">
+            <path fill="#8fd0cc" d="M27 26C29 16 35 8 47 5c-4 7-6 14-8 21z"/>
+            <path fill="url(#dove-body)" d="M14 33 2 37l4-6-4-6 12 4c5-2 9-3 13-3 4 0 7 1 11 1l8-5c3-2 6-2 7 1l6 1-5 2c-1 5-5 9-12 11-9 2-19 1-28-4z"/>
+            <path fill="url(#dove-body)" d="M22 28c-3-9-1-19 8-26 1 9 4 17 9 24z"/>
+            <path fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".8" d="M26 25c-1-6 0-12 4-18M30 25c1-5 2-9 4-13"/>
+            <circle cx="50" cy="24" r=".9" fill="#2f6f6d"/>
+            <path fill="#c9a86a" d="m56 25 5 .5-5 1.3z"/>
+        </symbol>
+
+        <!-- Paloma posada con ramita -->
+        <symbol id="i-dove-perched" viewBox="0 0 80 60">
+            <path fill="#e8f6f4" stroke="#8fcfca" stroke-width=".8" d="M10 6c10 2 20 10 26 24-9-2-18-8-26-24z"/>
+            <path fill="#d2efec" stroke="#8fcfca" stroke-width=".8" d="M20 3c12 3 20 12 22 26C33 24 25 15 20 3z"/>
+            <path fill="#f6fbfa" stroke="#7fc4bf" stroke-width=".9" d="M24 34c6-6 14-8 22-6l8-6c3-2 7-1 8 2l5 1-4 2c0 6-4 11-11 14-8 3-17 3-24 0l-12 6 3-6-8-1 8-3z"/>
+            <circle cx="58" cy="25" r="1" fill="#2f6f6d"/>
+            <path fill="none" stroke="#c9a86a" stroke-width="1" d="M62 28c4 3 9 4 14 3"/>
+            <path fill="url(#gold)" d="M70 31c2-3 5-3 7-2-2 2-4 3-7 2zm-4-1c0-3 2-5 5-5-1 2-2 4-5 5z"/>
+        </symbol>
+
+        <!-- Cruz -->
+        <symbol id="i-cross" viewBox="0 0 24 36">
+            <path fill="url(#gold)" d="M10 1.5c0-.8.9-1.5 2-1.5s2 .7 2 1.5V10h8.5c.8 0 1.5.9 1.5 2s-.7 2-1.5 2H14v20.5c0 .8-.9 1.5-2 1.5s-2-.7-2-1.5V14H1.5C.7 14 0 13.1 0 12s.7-2 1.5-2H10z"/>
+        </symbol>
+
+        <!-- Ramita de hojas -->
+        <symbol id="i-branch" viewBox="0 0 40 80">
+            <path fill="none" stroke="url(#gold)" stroke-width="1.1" d="M20 79C18 58 19 30 23 2"/>
+            <g fill="#9ccfc3" stroke="#b8925a" stroke-width=".5">
+                <path d="M19 66c-6-1-11-5-13-10 6 0 11 4 13 10z"/>
+                <path d="M20 58c6-2 11-6 13-11-6 0-11 4-13 11z"/>
+                <path d="M19 48c-6-1-11-5-13-10 6 0 11 4 13 10z"/>
+                <path d="M20 40c6-2 11-6 13-11-6 0-11 4-13 11z"/>
+                <path d="M20 30c-6-1-10-5-12-10 6 0 10 4 12 10z"/>
+                <path d="M21 22c5-2 10-6 11-11-5 0-10 4-11 11z"/>
+                <path d="M22 12c-4-2-7-5-8-10 5 1 8 5 8 10z"/>
+            </g>
+        </symbol>
+
+        <!-- Enredadera dorada -->
+        <symbol id="i-gold-vine" viewBox="0 0 40 120">
+            <path fill="none" stroke="url(#gold)" stroke-width="1.2" d="M22 118C14 96 26 80 18 60S22 24 16 4"/>
+            <path fill="none" stroke="url(#gold)" stroke-width=".8" d="M16 4c-4 2-5 6-2 8 2 1 4-1 3-3"/>
+            <g fill="url(#gold)">
+                <path d="M20 104c-7-1-13-5-15-11 7 0 12 4 15 11z"/>
+                <path d="M21 88c7-2 12-7 14-13-7 1-12 6-14 13z"/>
+                <path d="M18 72c-7-1-12-6-14-12 7 0 12 5 14 12z"/>
+                <path d="M20 54c7-1 12-6 13-12-6 0-11 5-13 12z"/>
+                <path d="M18 38c-6-1-11-5-13-11 6 0 11 4 13 11z"/>
+                <path d="M19 22c6-1 10-5 11-10-5 0-10 4-11 10z"/>
+            </g>
+        </symbol>
+
+        <!-- Hortensia (se rellena desde JS) -->
+        <symbol id="i-hydrangea" viewBox="0 0 100 80"></symbol>
+
+        <!-- Globos con mariposa -->
+        <symbol id="i-balloons" viewBox="0 0 90 110">
+            <g fill="none" stroke="#b9c9c6" stroke-width=".7">
+                <path d="M26 58c2 14-4 26 10 48"/>
+                <path d="M50 44c-2 18 0 36-14 62"/>
+                <path d="M70 62c-4 16-20 26-34 44"/>
+            </g>
+            <ellipse cx="26" cy="38" rx="17" ry="20" fill="url(#balloon)"/>
+            <ellipse cx="70" cy="44" rx="17" ry="19" fill="url(#balloon)"/>
+            <ellipse cx="50" cy="22" rx="18" ry="21" fill="url(#balloon)"/>
+            <ellipse cx="57" cy="47" rx="15" ry="17" fill="#f2f7f6" opacity=".85"/>
+            <path fill="#7fc6c1" d="m25 58 3 0-1.5 2.5zm25-15 3 0-1.5 2.5zm20 19 3 0-1.5 2.5z"/>
+            <g transform="translate(64 34)">
+                <path fill="#8fd3cd" stroke="#b8925a" stroke-width=".4" d="M6 6C2 0-2 2 0 7c1 3 4 2 6-1zm0 0c4-6 8-4 6 1-1 3-4 2-6-1zm0 0c-3 2-5 6-2 7 1 0 2-3 2-7zm0 0c3 2 5 6 2 7-1 0-2-3-2-7z"/>
+            </g>
+        </symbol>
+
+        <!-- Marco con esquinas recortadas (Padres / Padrinos) -->
+        <symbol id="i-plaque" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path fill="url(#teal)" d="M9 0h82v5h9v90h-9v5H9v-5H0V5h9z"/>
+            <path fill="#e9f7f5" d="M11.5 2.5h77v5h9v85h-9v5h-77v-5h-9v-85h9z"/>
+            <path fill="#fffdf8" d="M13 4h74v5h9v82h-9v5H13v-5H4V9h9z"/>
+            <path fill="url(#plaque-wash)" d="M13 4h74v5h9v82h-9v5H13v-5H4V9h9z"/>
+            <path fill="none" stroke="url(#gold)" stroke-width="1.2" vector-effect="non-scaling-stroke" d="M16 7.5h68v5h8.5v75H84v5H16v-5H7.5v-75H16z"/>
+        </symbol>
+
+        <!-- Iconos de detalles -->
+        <symbol id="i-calendar" viewBox="0 0 48 48">
+            <rect x="5" y="9" width="38" height="34" rx="4" fill="#7cc4c0"/>
+            <rect x="5" y="9" width="38" height="9" rx="4" fill="#5aa9a6"/>
+            <rect x="12" y="4" width="4" height="9" rx="2" fill="url(#gold)"/>
+            <rect x="32" y="4" width="4" height="9" rx="2" fill="url(#gold)"/>
+            <g fill="url(#gold)">
+                <rect x="11" y="22" width="5" height="4" rx="1"/><rect x="19" y="22" width="5" height="4" rx="1"/><rect x="27" y="22" width="5" height="4" rx="1"/><rect x="35" y="22" width="3" height="4" rx="1"/>
+                <rect x="11" y="29" width="5" height="4" rx="1"/><rect x="19" y="29" width="5" height="4" rx="1"/><rect x="27" y="29" width="5" height="4" rx="1"/><rect x="35" y="29" width="3" height="4" rx="1"/>
+                <rect x="11" y="36" width="5" height="3" rx="1"/><rect x="19" y="36" width="5" height="3" rx="1"/>
+            </g>
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="#7cc4c0"/>
+            <circle cx="24" cy="24" r="16" fill="#fffdf8"/>
+            <circle cx="24" cy="24" r="20" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+            <g stroke="#b8925a" stroke-width="1.4" stroke-linecap="round">
+                <path d="M24 10v2.5M24 35.5V38M10 24h2.5M35.5 24H38"/>
+                <path d="M24 24v-9M24 24l7 5" stroke="#5aa9a6" stroke-width="2.2"/>
+            </g>
+            <circle cx="24" cy="24" r="1.8" fill="url(#gold)"/>
+        </symbol>
+        <symbol id="i-church" viewBox="0 0 48 48">
+            <path fill="url(#gold)" d="M23 1h2v4h3v2h-3v5h-2V7h-3V5h3z"/>
+            <path fill="#7cc4c0" d="M24 11 4 25h5v19h30V25h5z"/>
+            <path fill="url(#gold)" d="M24 11 4 25h3.5L24 13.5 40.5 25H44z"/>
+            <path fill="#fffdf8" d="M20 44V34a4 4 0 0 1 8 0v10z"/>
+            <circle cx="24" cy="25" r="2.6" fill="#fffdf8"/>
+        </symbol>
+        <symbol id="i-house" viewBox="0 0 48 48">
+            <path fill="#7cc4c0" d="M24 8 6 23h4v21h28V23h4z"/>
+            <path fill="url(#gold)" d="M24 6 3 23.5h4L24 9.5l17 14h4zM33 9h4v8l-4-3.3z"/>
+            <rect x="14" y="27" width="7" height="7" rx="1" fill="#fffdf8"/>
+            <rect x="27" y="27" width="7" height="17" rx="1" fill="#fffdf8"/>
+            <path stroke="#7cc4c0" stroke-width="1" d="M17.5 27v7M14 30.5h7"/>
+        </symbol>
+
+        <!-- Iconos de botones -->
+        <symbol id="i-envelope" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M3 7.5 12 3l9 4.5V19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="m3 8 9 6.5L21 8"/>
+        </symbol>
+        <symbol id="i-book-close" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 4.5h11a3 3 0 0 1 3 3V20H7a3 3 0 0 1-3-3z"/>
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M4 17a3 3 0 0 1 3-3h11M10 7.5v4M8 9.5h4"/>
+        </symbol>
+        <symbol id="i-note" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M9 17.5a3 3 0 1 1-2-2.8V5l11-2v12.5a3 3 0 1 1-2-2.8V6.4l-7 1.3z"/>
+        </symbol>
+    </svg>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
