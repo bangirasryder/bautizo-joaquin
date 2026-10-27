@@ -230,30 +230,18 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 43cqw;
-    aspect-ratio: 200 / 260;
+    width: 49cqw;
+    aspect-ratio: 240 / 270;
     transform: translate(-50%, -50%);
 }
-.portrait__photo {
+.portrait__frame {
     position: absolute;
-    left: 11%;
-    top: 8.5%;
-    width: 78%;
-    height: 83%;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #eef6f4;
-    box-shadow: inset 0 0 2cqw rgba(80, 60, 30, .15);
-}
-.portrait__photo img {
+    inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: 50% 42%;
-    transform: scale(1.08);
-    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 .6cqw 1cqw rgba(110, 85, 45, .18));
 }
-.portrait__wreath { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 
 .orn--dove { width: 13cqw; height: 10cqw; }
 .orn--tl { left: 3cqw;  top: 1cqw; }
@@ -634,7 +622,7 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     /* La foto crece con el alto disponible */
     .content--invite { padding-top: 9cqw; padding-bottom: 8cqw; }
     .portrait-zone { flex: 1 1 auto; height: auto; min-height: 62cqw; margin: 2cqw 0; }
-    .portrait { width: min(64cqw, (100cqh - 86cqw) * .77); }
+    .portrait { width: min(72cqw, (100cqh - 86cqw) * .889); }
     .orn--dove { width: 14cqw; height: 11cqw; }
 
     /* Padres y padrinos centrados en el alto de la página */
