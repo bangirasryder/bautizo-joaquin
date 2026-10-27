@@ -264,54 +264,41 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     color: var(--gold-deep);
 }
 
-/* Tarjeta de la iglesia: abre Google Maps */
+/* Iglesia y recepción: toda la columna abre Google Maps */
 .detail__link {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: -1.2cqw 0;
-    padding: 1.2cqw .6cqw;
-    border-radius: 2.4cqw;
     color: inherit;
     text-decoration: none;
-    background: rgba(124, 196, 192, .12);
-    box-shadow: inset 0 0 0 .25cqw rgba(124, 196, 192, .45);
-    transition: background .25s, transform .25s, box-shadow .25s;
-}
-.detail__link:hover,
-.detail__link:focus-visible {
-    background: rgba(124, 196, 192, .24);
-    box-shadow: inset 0 0 0 .3cqw rgba(79, 158, 155, .7);
-    transform: translateY(-.5cqw);
     outline: none;
 }
-.detail__icon-wrap { position: relative; }
-.detail__pin {
-    position: absolute;
-    right: -2.2cqw;
-    top: -1.2cqw;
-    width: 4.2cqw;
-    height: 5.6cqw;
-    filter: drop-shadow(0 .3cqw .4cqw rgba(90, 60, 20, .3));
-    animation: pin-bounce 2.4s ease-in-out infinite;
+.detail__link:focus-visible .detail__map { box-shadow: 0 0 0 .5cqw rgba(79, 158, 155, .35); }
+.detail__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .8cqw;
+    margin-top: 1cqw;
 }
-@keyframes pin-bounce {
-    0%, 70%, 100% { transform: translateY(0); }
-    80% { transform: translateY(-1cqw); }
-    90% { transform: translateY(0); }
+.detail__pin {
+    width: 3.2cqw;
+    height: 4.3cqw;
+    flex-shrink: 0;
 }
 .detail__map {
-    margin-top: .8cqw;
-    padding: .4cqw 1.8cqw;
+    padding: .5cqw 1.6cqw;
     border-radius: 999px;
     font-family: var(--font-caps);
     font-size: 2.3cqw;
     letter-spacing: .08em;
     text-transform: uppercase;
+    white-space: nowrap;
     color: #fffdf8;
     background: linear-gradient(135deg, #7cc4c0, #4f9e9b);
+    transition: filter .2s;
 }
+.detail__link:hover .detail__map { filter: brightness(1.08); }
 
 .invite__gift {
     font-style: italic;
