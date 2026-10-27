@@ -486,9 +486,9 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     color: var(--gold-deep);
 }
 
-.plaque { position: absolute; width: 56cqw; height: 54cqw; }
-.plaque--parents    { left: 8cqw;  top: 32cqw; z-index: 1; }
-.plaque--godparents { right: 7cqw; top: 79cqw; z-index: 2; }
+.plaque { position: absolute; width: 56cqw; height: 58cqw; }
+.plaque--parents    { left: 8cqw;  top: 30cqw; z-index: 1; }
+.plaque--godparents { right: 7cqw; top: 78cqw; z-index: 2; }
 .plaque__shape {
     position: absolute;
     inset: 0;
@@ -501,21 +501,21 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 6cqw 7cqw;
+    /* Margen superior amplio para que el título no toque el filo dorado */
+    padding: 9cqw 7cqw 4cqw;
 }
-.plaque--parents .plaque__text { padding-bottom: 12cqw; padding-right: 9cqw; }
-.plaque--godparents .plaque__text { padding-top: 4cqw; padding-bottom: 8cqw; }
+.plaque--parents .plaque__text { padding-right: 9cqw; }
 
-.plaque__title { font-size: 7.6cqw; color: var(--gold-deep); margin-bottom: 2.2cqw; }
+.plaque__title { font-size: 7.6cqw; color: var(--gold-deep); margin-bottom: 1.4cqw; }
 .plaque__names {
     font-size: 5.5cqw;
-    line-height: 1.12;
+    line-height: 1.06;
     font-weight: 500;
     color: var(--ink);
 }
-.plaque__and { font-size: 5.5cqw; line-height: 1.1; color: var(--ink); font-style: italic; }
+.plaque__and { font-size: 5.5cqw; line-height: 1; color: var(--ink); font-style: italic; }
 
 .plaque__dove { width: 24cqw; height: 18cqw; left: -8cqw; top: -8.5cqw; z-index: 3; }
 .plaque__hydrangea--tr { width: 21cqw; height: 17cqw; right: -6cqw; top: -7cqw; z-index: 3; }
@@ -523,7 +523,7 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
 .plaque__balloons { width: 20cqw; height: 25cqw; right: -6cqw; top: -20cqw; }
 .plaque__vine--l2 { width: 8cqw; height: 26cqw; left: -4cqw; top: 22cqw; z-index: 3; }
 .plaque__vine--r2 { width: 8cqw; height: 26cqw; right: -4cqw; top: 22cqw; z-index: 3; transform: scaleX(-1); }
-.plaque__hydrangea--bottom { width: 22cqw; height: 17cqw; left: 50%; bottom: -8cqw; margin-left: -11cqw; z-index: 3; }
+.plaque__hydrangea--bottom { width: 22cqw; height: 17cqw; left: 50%; bottom: -6cqw; margin-left: -11cqw; z-index: 3; }
 
 /* ---------- Controles ---------- */
 .controls {
