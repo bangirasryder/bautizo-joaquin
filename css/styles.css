@@ -216,53 +216,25 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     height: 56cqw;
     flex-shrink: 0;
 }
-.wash--portrait {
-    inset: 4cqw 6cqw 2cqw;
-    border-radius: 45% 55% 50% 50%;
-    background:
-        radial-gradient(ellipse at 18% 30%, rgba(124, 196, 192, .55), transparent 55%),
-        radial-gradient(ellipse at 85% 70%, rgba(124, 196, 192, .55), transparent 55%),
-        radial-gradient(ellipse at 80% 20%, rgba(170, 220, 215, .45), transparent 50%),
-        radial-gradient(ellipse at 20% 85%, rgba(170, 220, 215, .5), transparent 50%);
-}
-
-.portrait {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 49cqw;
-    aspect-ratio: 240 / 270;
-    transform: translate(-50%, -50%);
-}
-.portrait__frame {
+/* Medallón recortado de la tarjeta impresa: su papel es blanco y se funde con multiply */
+.content--invite { z-index: auto; }
+.medallion {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-    filter: drop-shadow(0 .6cqw 1cqw rgba(110, 85, 45, .18));
-}
-
-.orn--dove { width: 13cqw; height: 10cqw; }
-.orn--tl { left: 3cqw;  top: 1cqw; }
-.orn--tr { right: 3cqw; top: 1cqw; transform: scaleX(-1); }
-.orn--bl { left: 4cqw;  bottom: 0; transform: rotate(-12deg); }
-.orn--br { right: 4cqw; bottom: 0; transform: scaleX(-1) rotate(-12deg); }
-.orn--cross { width: 4.6cqw; height: 7cqw; top: 50%; margin-top: -5cqw; }
-.orn--cl { left: 4.5cqw; }
-.orn--cr { right: 4.5cqw; }
-.orn--branch { width: 7cqw; height: 14cqw; }
-.orn--bl-up  { left: 9cqw;  top: 10cqw; transform: rotate(-28deg); }
-.orn--bl-low { left: 9cqw;  bottom: 9cqw; transform: rotate(-150deg) scaleX(-1); }
-.orn--br-up  { right: 9cqw; top: 10cqw; transform: rotate(28deg) scaleX(-1); }
-.orn--br-low { right: 9cqw; bottom: 9cqw; transform: rotate(150deg); }
-
-.float { animation: float 4.5s ease-in-out infinite; }
-.float--late { animation-delay: -2.2s; }
-/* Se anima "translate" para no pisar el espejo/rotación de "transform" */
-@keyframes float {
-    0%, 100% { translate: 0 0; }
-    50% { translate: 0 -1.4cqw; }
+    margin: auto;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    mix-blend-mode: multiply;
+    -webkit-mask:
+        linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent),
+        linear-gradient(180deg, transparent, #000 3%, #000 97%, transparent);
+    -webkit-mask-composite: source-in;
+    mask:
+        linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent),
+        linear-gradient(180deg, transparent, #000 3%, #000 97%, transparent);
+    mask-composite: intersect;
 }
 
 .details {
@@ -622,8 +594,6 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
     /* La foto crece con el alto disponible */
     .content--invite { padding-top: 9cqw; padding-bottom: 8cqw; }
     .portrait-zone { flex: 1 1 auto; height: auto; min-height: 62cqw; margin: 2cqw 0; }
-    .portrait { width: min(72cqw, (100cqh - 86cqw) * .889); }
-    .orn--dove { width: 14cqw; height: 11cqw; }
 
     /* Padres y padrinos centrados en el alto de la página */
     .content--family { inset: auto 0; top: 50%; height: 139cqw; transform: translateY(-50%); }
@@ -647,5 +617,5 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
 @media (prefers-reduced-motion: reduce) {
     :root { --flip: .01s; }
     .book, .book__shadow { transition-duration: .01s; }
-    .float, .seal, .particle, .btn--primary.is-calling { animation: none; }
+    .seal, .particle, .btn--primary.is-calling { animation: none; }
 }

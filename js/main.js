@@ -95,98 +95,6 @@
         el('circle', { r: 1.1, fill: '#c9a86a' }, g);
     }
 
-    /* ---------- Marco de encaje de la foto (como la tarjeta impresa) ---------- */
-    function buildLaceFrame(svg) {
-        const cx = 120, cy = 135;
-        const TAU = Math.PI * 2;
-        const rand = seeded(11);
-
-        // Contorno festoneado alrededor de un óvalo. dir = 1: lóbulos hacia afuera; -1: hacia adentro.
-        // Con "alternate" los lóbulos alternan grande y pequeño, como el encaje de la tarjeta.
-        function scallop(rx, ry, lobes, amp, dir, alternate) {
-            const n = lobes * 20;
-            let d = '';
-            for (let i = 0; i <= n; i++) {
-                const t = (i / n) * TAU - Math.PI / 2;
-                const u = (i / n) * lobes;
-                const lobe = Math.floor(u) % lobes;
-                const bump = Math.pow(Math.sin((u % 1) * Math.PI), 0.6) * (alternate && lobe % 2 ? 0.55 : 1);
-                const k = 1 + dir * amp * bump;
-                d += (i ? 'L' : 'M') + (cx + rx * k * Math.cos(t)).toFixed(2) + ' ' + (cy + ry * k * Math.sin(t)).toFixed(2);
-            }
-            return d + 'Z';
-        }
-
-        const outer = scallop(104, 119, 26, 0.085, 1, true);
-        const inner = scallop(78, 98, 40, 0.035, -1, false);
-
-        // Foto recortada por el borde interior
-        const defs = el('defs', {}, svg);
-        const clip = el('clipPath', { id: 'photo-clip' }, defs);
-        el('path', { d: inner }, clip);
-        el('rect', { x: 30, y: 30, width: 180, height: 210, fill: '#f4f8f7', 'clip-path': 'url(#photo-clip)' }, svg);
-        el('image', {
-            href: svg.dataset.photo, x: 34, y: 16, width: 172, height: 235,
-            preserveAspectRatio: 'xMidYMid slice', 'clip-path': 'url(#photo-clip)'
-        }, svg);
-
-        // Banda de encaje blanca con filo dorado por fuera y por dentro
-        el('path', { d: outer + inner, 'fill-rule': 'evenodd', fill: '#fffdf8' }, svg);
-        el('path', { d: outer, fill: 'none', stroke: 'url(#gold)', 'stroke-width': 1.3, 'stroke-linejoin': 'round' }, svg);
-        el('path', { d: scallop(100, 115, 26, 0.085, 1, true), fill: 'none', stroke: '#e6d3ad', 'stroke-width': .5 }, svg);
-        el('path', { d: inner, fill: 'none', stroke: 'url(#gold)', 'stroke-width': 1.3, 'stroke-linejoin': 'round' }, svg);
-
-        // Enredadera dorada ondulada que sube por ambos lados hasta la cruz
-        const mid = (t, wob) => [cx + (91 + wob) * Math.cos(t), cy + (108.5 + wob) * Math.sin(t)];
-        const gap = 0.2;
-        const from = -Math.PI / 2 + gap, to = Math.PI * 1.5 - gap;
-        const steps = 260;
-        const along = [];
-        let vine = '';
-        for (let i = 0; i <= steps; i++) {
-            const t = from + (to - from) * (i / steps);
-            const wob = 3.2 * Math.sin((i / steps) * Math.PI * 34);
-            const [x, y] = mid(t, wob);
-            along.push({ t, x, y, wob });
-            vine += (i ? 'L' : 'M') + x.toFixed(2) + ' ' + y.toFixed(2);
-        }
-        el('path', { d: vine, fill: 'none', stroke: 'url(#gold)', 'stroke-width': .75, 'stroke-linecap': 'round' }, svg);
-
-        // Hojas, flores y botones a lo largo de la enredadera
-        for (let i = 3; i < along.length - 3; i += 4) {
-            const p = along[i], q = along[i + 1];
-            const ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
-            const kind = Math.round((i - 3) / 4) % 4;
-            if (kind === 1 || kind === 3) {
-                const side = kind === 1 ? -1 : 1;
-                el('path', {
-                    d: 'M0 0c2.8-3 7.6-3.2 10.6 0-3 3-7.8 3-10.6 0z',
-                    fill: rand() > 0.5 ? '#a9d0c0' : '#b9dccd', stroke: '#b8925a', 'stroke-width': .35,
-                    transform: `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${(ang + side * 55).toFixed(0)})`
-                }, svg);
-            } else if (kind === 0) {
-                const [fx, fy] = mid(p.t, p.wob > 0 ? p.wob + 3.5 : p.wob - 3.5);
-                floret(svg, fx, fy, 0.95);
-            } else {
-                // Botón dorado de tres puntitos
-                const g = el('g', { fill: '#c9a86a', transform: `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${ang.toFixed(0)})` }, svg);
-                el('circle', { cx: 0, cy: -2.2, r: .8 }, g);
-                el('circle', { cx: 1.4, cy: -3.4, r: .7 }, g);
-                el('circle', { cx: -1.2, cy: -3.5, r: .7 }, g);
-            }
-        }
-
-        // Puntitos de encaje cerca del borde exterior
-        for (let i = 0; i < 26; i++) {
-            const t = ((i + 0.5) / 26) * TAU - Math.PI / 2;
-            const k = i % 2 ? 1.025 : 1.055;
-            el('circle', { cx: (cx + 104 * k * Math.cos(t)).toFixed(1), cy: (cy + 119 * k * Math.sin(t)).toFixed(1), r: .9, fill: 'none', stroke: '#c9a86a', 'stroke-width': .35 }, svg);
-        }
-
-        // Cruz dorada arriba, dentro de la banda
-        el('use', { href: '#i-cross', x: cx - 4.5, y: cy - 108.5 - 7, width: 9, height: 13.5 }, svg);
-    }
-
     /* ---------- Destellos de fondo ---------- */
     function buildParticles() {
         if (reduceMotion) return;
@@ -425,8 +333,7 @@
     }
 
     buildHydrangea();
-    document.querySelectorAll('[data-wreath]').forEach(buildWreath);
-    document.querySelectorAll('[data-lace-frame]').forEach(buildLaceFrame);
+    document.querySelectorAll('[data-wreath]').forEach(buildWreath);
     buildParticles();
     setupBook();
 })();
