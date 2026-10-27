@@ -557,28 +557,54 @@ p, h1, h2, h3 { margin: 0; font-weight: 400; }
    Móvil: el libro se abre hacia arriba (bisagra superior)
    ========================================================= */
 @media (max-width: 720px) {
+    /* La página ocupa casi toda la pantalla; abajo queda la barra de botones */
     :root {
-        --pw: min(calc(100vw - 32px), 440px);
+        --pw: min(calc(100vw - 20px), 480px);
+        --ph: max(calc(var(--pw) / 0.72), calc(100svh - 160px));
         --flip: 1.4s;
     }
-    .intro { padding-top: 18px; }
-    .stage { padding-top: 24px; }
+    .intro { padding: 16px 16px 4px; }
+    .stage { align-items: flex-start; padding: 22px 10px 96px; }
 
+    .page { container-type: size; }
+
+    /* La portada gira hacia abajo: la foto queda arriba y los padrinos debajo */
     .book { perspective: 2000px; }
-    .book.is-open { transform: none; margin-top: var(--ph); }
-    .book.is-open .book__shadow { left: 4%; }
+    .book.is-open { transform: none; margin-bottom: var(--ph); }
+    .book.is-open .book__shadow { opacity: 0; }
 
-    .leaf { transform-origin: center top; }
-    .book.is-open .leaf { transform: rotateX(180deg); }
+    .leaf { transform-origin: center bottom; }
+    .book.is-open .leaf { transform: rotateX(-180deg); }
     .face--back { transform: rotateX(180deg); }
 
+    .seal { right: 50%; top: -5cqw; margin: 0 -7.5cqw 0 0; }
 
-    .seal { right: 50%; top: auto; bottom: -5cqw; margin: 0 -7.5cqw 0 0; }
+    .page__spine--left  { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 9cqw; background: linear-gradient(0deg, rgba(120, 90, 50, .16), transparent); }
+    .page__spine--right { left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 9cqw; background: linear-gradient(180deg, rgba(120, 90, 50, .16), transparent); }
 
-    .page__spine--left  { left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 9cqw; background: linear-gradient(180deg, rgba(120, 90, 50, .16), transparent); }
-    .page__spine--right { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 9cqw; background: linear-gradient(0deg, rgba(120, 90, 50, .16), transparent); }
+    /* La foto crece con el alto disponible */
+    .content--invite { padding-top: 9cqw; padding-bottom: 8cqw; }
+    .portrait-zone { flex: 1 1 auto; height: auto; min-height: 62cqw; margin: 2cqw 0; }
+    .portrait { width: min(64cqw, (100cqh - 86cqw) * .77); }
+    .orn--dove { width: 14cqw; height: 11cqw; }
 
-    .btn { padding: 13px 22px; }
+    /* Padres y padrinos centrados en el alto de la página */
+    .content--family { inset: auto 0; top: 50%; height: 139cqw; transform: translateY(-50%); }
+    .content--cover { padding-top: 12cqw; }
+
+    /* Barra de botones fija abajo */
+    .controls {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-wrap: nowrap;
+        gap: 10px;
+        padding: 18px 12px max(14px, env(safe-area-inset-bottom));
+        background: linear-gradient(rgba(245, 236, 220, 0), rgba(245, 236, 220, .92) 40%);
+    }
+    .btn { padding: 12px 20px; font-size: 12px; letter-spacing: .1em; white-space: nowrap; }
+    .btn__extra { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

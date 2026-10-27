@@ -268,7 +268,7 @@
         function setMusic(on) {
             on ? MusicBox.play() : MusicBox.pause();
             musicBtn.setAttribute('aria-pressed', String(on));
-            musicText.textContent = on ? 'Pausar música' : 'Música';
+            musicText.innerHTML = on ? 'Pausar<span class="btn__extra"> música</span>' : 'Música';
         }
 
         function setOpen(next) {
@@ -276,21 +276,23 @@
             book.classList.toggle('is-open', open);
             toggleBtn.classList.remove('is-calling');
             toggleBtn.setAttribute('aria-expanded', String(open));
-            toggleText.textContent = open ? 'Cerrar invitación' : 'Abrir invitación';
+            toggleText.innerHTML = open ? 'Cerrar<span class="btn__extra"> invitación</span>' : 'Abrir invitación';
             toggleIcon.setAttribute('href', open ? '#i-book-close' : '#i-envelope');
             cover.setAttribute('tabindex', open ? '-1' : '0');
             hint.textContent = open
-                ? (stacked.matches ? 'Desliza para ver toda la invitación' : '¡Te esperamos para celebrar juntos!')
+                ? (stacked.matches ? 'Desliza hacia abajo para ver a mis padres y padrinos' : '¡Te esperamos para celebrar juntos!')
                 : 'Pulsa el botón para abrir la invitación';
 
             if (open) {
                 musicBtn.hidden = false;
                 burstPetals();
                 if (!MusicBox.playing) setMusic(true);
+                // En celular, la página con la foto se acomoda para llenar la pantalla
                 if (stacked.matches) {
                     setTimeout(() => {
-                        document.getElementById('stage').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-                    }, 900);
+                        const top = book.getBoundingClientRect().top + window.scrollY - 10;
+                        window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+                    }, 500);
                 }
             } else {
                 window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
