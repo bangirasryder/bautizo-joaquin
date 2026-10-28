@@ -278,7 +278,9 @@
         const musicText = document.getElementById('musicText');
         const hint = document.getElementById('hint');
         const stacked = window.matchMedia('(max-width: 720px)');
+        const AUTO_OPEN_MS = 4000;
         let open = false;
+        let autoTimer = null;
 
         toggleBtn.classList.add('is-calling');
 
@@ -288,7 +290,30 @@
             musicText.innerHTML = on ? 'Pausar<span class="btn__extra"> música</span>' : 'Música';
         }
 
-        function setOpen(next) {
+        function startMusicOnFirstTouch() {
+            const onTouch = e => {
+                document.removeEventListener('pointerdown', onTouch, true);
+                document.removeEventListener('keydown', onTouch, true);
+                // Los botones de música y cerrar ya hacen lo suyo con ese mismo toque
+                if (e.target.closest('#musicBtn, #toggleBtn')) return;
+                if (open && !MusicBox.playing) setMusic(true);
+            };
+            document.addEventListener('pointerdown', onTouch, true);
+            document.addEventListener('keydown', onTouch, true);
+        }
+
+        // Abrir sola a los 4 s, contados solo mientras la pestaña está a la vista
+        function scheduleAutoOpen() {
+            if (document.hidden) {
+                document.addEventListener('visibilitychange', scheduleAutoOpen, { once: true });
+                return;
+            }
+            autoTimer = setTimeout(() => { if (!open) setOpen(true, true); }, AUTO_OPEN_MS);
+        }
+
+        function setOpen(next, auto = false) {
+            clearTimeout(autoTimer);
+            autoTimer = null;
             open = next;
             book.classList.toggle('is-open', open);
             toggleBtn.classList.remove('is-calling');
@@ -303,7 +328,10 @@
             if (open) {
                 musicBtn.hidden = false;
                 burstPetals();
-                if (!MusicBox.playing) setMusic(true);
+                // El navegador no deja sonar audio sin un toque del invitado:
+                // si se abrió sola, la música empieza con el primer toque en la página
+                if (auto) startMusicOnFirstTouch();
+                else if (!MusicBox.playing) setMusic(true);
                 // En celular, la página con la foto se acomoda para llenar la pantalla
                 if (stacked.matches) {
                     setTimeout(() => {
@@ -330,10 +358,12 @@
         document.addEventListener('visibilitychange', () => {
             if (document.hidden && MusicBox.playing) setMusic(false);
         });
+
+        scheduleAutoOpen();
     }
 
     buildHydrangea();
-    document.querySelectorAll('[data-wreath]').forEach(buildWreath);
+    document.querySelectorAll('[data-wreath]').forEach(buildWreath);
     buildParticles();
     setupBook();
 })();
