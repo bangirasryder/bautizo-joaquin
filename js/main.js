@@ -237,6 +237,13 @@
 
         return {
             get playing() { return playing; },
+            // ¿Deja el navegador sonar audio sin que el invitado haya tocado la página?
+            async canAutoplay() {
+                if (!ctx) setup();
+                if (ctx.state === 'running') return true;
+                await Promise.race([ctx.resume().catch(() => {}), new Promise(r => setTimeout(r, 400))]);
+                return ctx.state === 'running';
+            },
             play() {
                 if (!ctx) setup();
                 playing = true;
@@ -308,7 +315,17 @@
                 document.addEventListener('visibilitychange', scheduleAutoOpen, { once: true });
                 return;
             }
-            autoTimer = setTimeout(() => { if (!open) setOpen(true, true); }, AUTO_OPEN_MS);
+            autoTimer = setTimeout(async () => {
+                // Primero la música (si el navegador lo permite) y enseguida se abre
+                const allowed = await MusicBox.canAutoplay();
+                if (open || autoTimer === null) return;
+                if (allowed) {
+                    setMusic(true);
+                    setTimeout(() => { if (!open && autoTimer !== null) setOpen(true, true); }, 300);
+                } else {
+                    setOpen(true, true);
+                }
+            }, AUTO_OPEN_MS);
         }
 
         function setOpen(next, auto = false) {
